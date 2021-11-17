@@ -72,10 +72,10 @@ public class Productos {
     }
     
     //toString
-
+    
     @Override
     public String toString() {
-        return "Productos{" + "precio=" + precio + ", tipoProducto=" + tipoProducto + ", NumPedido=" + NumPedido + ", fechaP=" + fechaP + '}';
+        return "Productos{" + "precio=" + precio + ", tipoProducto=" + this.tipoProducto.getNombreProducto() + ", NumPedido=" + NumPedido + ", fechaP=" + fechaP + '}';
     }
 
     
