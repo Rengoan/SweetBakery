@@ -26,11 +26,14 @@ public class Cliente {
     }
 
     public Cliente(String nombre, String apellido, String correo, String tlf) {
+        this();
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.tlf = tlf;
     }
+
+ 
     
     
     

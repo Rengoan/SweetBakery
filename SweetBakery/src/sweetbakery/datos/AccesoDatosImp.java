@@ -86,7 +86,7 @@ public class AccesoDatosImp implements IAccesoDatos {
         File archivo = new File(nombreArchivoP);
 
         Productos productoN = null;
-        String[] producto = new String[4];
+        String[] producto = new String[6];
         List<Productos> productos = new ArrayList<>();
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -96,10 +96,11 @@ public class AccesoDatosImp implements IAccesoDatos {
             String lectura = null;
             while ((lectura = entrada.readLine()) != null) {
 
-                producto = lectura.split(";"); // {idPruducto, TipoProducto(enum), precio,fecha}
+                producto = lectura.split(";"); // {idPruducto, nombreProducto,descripcion, precio,fecha}
                 productoN = new Productos(Integer.parseInt(producto[0]),
-                        producto[1], Double.parseDouble(producto[2]),
-                        formatoFecha.parse(producto[3]));
+                        producto[1],producto[2],TipoProducto.valueOf(producto[3]),
+                        Double.parseDouble(producto[4]),
+                        formatoFecha.parse(producto[5]));
                 productos.add(productoN);
             }
             entrada.close();
@@ -176,94 +177,413 @@ public class AccesoDatosImp implements IAccesoDatos {
         return empleados;
     }
 
-    @Override
-    public void escribirP(Productos producto, String nombreArchivoP, boolean anexar) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void escribirC(Cliente cliente, String nombreArchivoC, boolean anexar) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void escribirEmp(Empleado empleado, String nombreArchivoEmp, boolean anexar) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+//    @Override
+//    public void escribirP(Productos producto, String nombreArchivoP, boolean anexar) throws EscrituraDatosEx {
+//            File archivo = new File(nombreArchivoP);
+//        
+//        try {
+//            PrintWriter salida = new PrintWriter(new FileWriter(archivo, anexar));
+//            salida.println(producto.getTipoProducto(),producto.getPrecio(),producto.getFechaC());
+//            salida.close();
+//        } catch (IOException ex) {
+//            ex.printStackTrace(System.out);
+//            throw new EscrituraDatosEx("Excepción al escribir en el archivo");
+//        }
+//    }
+//
+//    @Override
+//    public void escribirC(Cliente cliente, String nombreArchivoC, boolean anexar) throws EscrituraDatosEx {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public void escribirEmp(Empleado empleado, String nombreArchivoEmp, boolean anexar) throws EscrituraDatosEx {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     @Override
     public void agregarP(Productos producto, String nombreArchivoP) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoP);
+
+        try {
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
+            String productoTxt = producto.getIdProducto() + ";"
+                    + producto.getNombreProducto() +";" + producto.getDescripcion()+ ";" 
+                    +producto.getTipoProducto()+";"+ producto.getPrecio() + ";"
+                    + producto.getFechaC();
+            salida.println(productoTxt);
+            salida.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new EscrituraDatosEx("Excepción escribiendo un nuevo "
+                    + "producto en el archivo");
+        }
     }
 
     @Override
     public void agregarC(Cliente cliente, String nombreArchivoC) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoC);
+
+        try {
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
+            String productoTxt = cliente.getIdCliente() + ";"
+                    + cliente.getNombre() + ";" + cliente.getApellido() + ";"
+                    + cliente.getCorreo() + ";" + cliente.getTlf();
+            salida.println(productoTxt);
+            salida.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new EscrituraDatosEx("Excepción escribiendo un nuevo "
+                    + "cliente en el archivo");
+        }
     }
 
     @Override
     public void agregarEmp(Empleado empleado, String nombreArchivoEmp) throws EscrituraDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoEmp);
+
+        try {
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
+            String productoTxt = empleado.getIdEmp() + ";"
+                    + empleado.getNombre() + ";" + empleado.getApellidos() + ";"
+                    + empleado.getCorreo() + ";" + empleado.getTlfEmp() + ";" + empleado.getSsocial() + ";"
+                    + empleado.getCbancaria();
+            salida.println(productoTxt);
+            salida.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new EscrituraDatosEx("Excepción escribiendo un nuevo "
+                    + "empleado en el archivo");
+        }
     }
 
     @Override
     public int buscarNombreP(String nombreArchivoP, String termino) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoP);
+        String[] producto = new String[6];
+        int contador = 0;
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                producto = lectura.split(";");
+                if (termino.equalsIgnoreCase(producto[1])) {
+                    break;
+                }
+                contador++;
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el producto con nombre " + termino);
+        }
+        return contador;
     }
 
     @Override
     public int buscarNombreC(String nombreArchivoC, String termino) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoC);
+        String[] cliente = new String[5];
+        int contador = 0;
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                cliente = lectura.split(";");
+                if (termino.equalsIgnoreCase(cliente[1])) {
+                    break;
+                }
+                contador++;
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el cliente con nombre " + termino);
+        }
+        return contador;
     }
 
     @Override
     public int buscarNombreEmp(String nombreArchivoEmp, String termino) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoEmp);
+        String[] empleado = new String[7];
+        int contador = 0;
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                empleado = lectura.split(";");
+                if (termino.equalsIgnoreCase(empleado[1])) {
+                    break;
+                }
+                contador++;
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el cliente con nombre " + termino);
+        }
+        return contador;
     }
 
     @Override
     public Productos buscarProductoPorId(String nombreArchivoP, int id) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoP);
+        String[] productoTxt = new String[6];
+        Productos producto = null;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                productoTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
+                if (id == Integer.parseInt(productoTxt[0])) {
+                    producto = new Productos(Integer.parseInt(productoTxt[0]),
+                        productoTxt[1],productoTxt[2],TipoProducto.valueOf(productoTxt[3]), Double.parseDouble(productoTxt[4]),
+                        formatoFecha.parse(productoTxt[5]));
+                    break;
+                }
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el producto con id " + id);
+        } catch (ParseException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return producto;
     }
 
     @Override
     public Cliente buscarClientePorId(String nombreArchivoC, int id) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoC);
+        String[] clienteTxt = new String[5];
+        Cliente cliente = null;
+        
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                clienteTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
+                if (id == Integer.parseInt(clienteTxt[0])) {
+                    cliente = new Cliente(Integer.parseInt(clienteTxt[0]),
+                        clienteTxt[1], clienteTxt[2],
+                        clienteTxt[3], clienteTxt[4]);
+                    break;
+                }
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el Cliente con id " + id);
+        }
+        return cliente;
     }
 
     @Override
     public Empleado buscarEmpleadoPorId(String nombreArchivoEmp, int id) throws LecturaDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoEmp);
+        String[] empleadoTxt = new String[7];
+        Empleado empleado = null;
+        
+
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+                empleadoTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
+                if (id == Integer.parseInt(empleadoTxt[0])) {
+                    empleado = new Empleado(Integer.parseInt(empleadoTxt[0]),
+                        empleadoTxt[1], empleadoTxt[2],
+                        empleadoTxt[3], empleadoTxt[4], empleadoTxt[5], empleadoTxt[6]);
+                    break;
+                }
+            }
+            entrada.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
+                    + "buscar el empleado con id " + id);
+        }
+        return empleado;
     }
 
     @Override
     public void borrarProducto(String nombreArchivoP, String nombreProducto) throws AccesoDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivoOri = new File(nombreArchivoP);
+        File archivoBackup = new File("temp.txt");
+        
+        String[] producto = new String[6];
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
+            String lectura = null; 
+            
+            while((lectura = entrada.readLine()) != null){
+            
+                producto = lectura.split(";");
+                if (producto[1] != nombreProducto){
+                    salida.println(producto);
+                }                
+                
+            }
+            entrada.close();
+            salida.close();
+            
+            if (existeP(nombreArchivoP)){
+                borrarArchivoP(nombreArchivoP);
+            }
+            
+            archivoBackup.renameTo(archivoOri);
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex){
+            ex.printStackTrace(System.out);
+        }
     }
 
     @Override
     public void borrarCliente(String nombreArchivoC, String nombreCliente) throws AccesoDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivoOri = new File(nombreArchivoC);
+        File archivoBackup = new File("temp.txt");
+        
+        String[] producto = new String[5];
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
+            String lectura = null; 
+            
+            while((lectura = entrada.readLine()) != null){
+            
+                producto = lectura.split(";");
+                if (producto[1] != nombreCliente){
+                    salida.println(producto);
+                }                
+                
+            }
+            entrada.close();
+            salida.close();
+            
+            if (existeC(nombreArchivoC)){
+                borrarArchivoC(nombreArchivoC);
+            }
+            
+            archivoBackup.renameTo(archivoOri);
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex){
+            ex.printStackTrace(System.out);
+        }
     }
 
     @Override
     public void borrarEmpleado(String nombreArchivoEmp, String nombreEmpleado) throws AccesoDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivoOri = new File(nombreArchivoEmp);
+        File archivoBackup = new File("temp.txt");
+        
+        String[] producto = new String[7];
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
+            String lectura = null; 
+            
+            while((lectura = entrada.readLine()) != null){
+            
+                producto = lectura.split(";");
+                if (producto[1] != nombreEmpleado){
+                    salida.println(producto);
+                }                
+                
+            }
+            entrada.close();
+            salida.close();
+            
+            if (existeEmp(nombreArchivoEmp)){
+                borrarArchivoEmp(nombreArchivoEmp);
+            }
+            
+            archivoBackup.renameTo(archivoOri);
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex){
+            ex.printStackTrace(System.out);
+        }
+        
     }
 
     @Override
     public String borrarArchivoP(String nombreArchivoP) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoP);
+        String msg = "";
+        if (existeP(nombreArchivoP)){
+            archivo.delete();
+            msg = "Recurso borrado con éxito";
+        }
+        else {
+            msg = "No se ha podido borrar el archivo ya que no existe";
+        }
+        return msg;
     }
 
     @Override
     public String borrarArchivoC(String nombreArchivoC) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         File archivo = new File(nombreArchivoC);
+        String msg = "";
+        if (existeP(nombreArchivoC)){
+            archivo.delete();
+            msg = "Recurso borrado con éxito";
+        }
+        else {
+            msg = "No se ha podido borrar el archivo ya que no existe";
+        }
+        return msg;
     }
 
     @Override
     public String borrarArchivoEmp(String nombreArchivoEmp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File archivo = new File(nombreArchivoEmp);
+        String msg = "";
+        if (existeP(nombreArchivoEmp)){
+            archivo.delete();
+            msg = "Recurso borrado con éxito";
+        }
+        else {
+            msg = "No se ha podido borrar el archivo ya que no existe";
+        }
+        return msg;
     }
 
 }

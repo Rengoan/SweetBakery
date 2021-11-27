@@ -19,9 +19,9 @@ public interface IAccesoDatos {
     List<Cliente> ListarC(String nombreArchivoC) throws LecturaDatosEx;
     List<Empleado> ListarEmp(String nombreArchivoEmp) throws LecturaDatosEx;
     
-    void escribirP (Productos producto,String nombreArchivoP, boolean anexar) throws EscrituraDatosEx;
-    void escribirC (Cliente cliente,String nombreArchivoC, boolean anexar) throws EscrituraDatosEx;
-    void escribirEmp (Empleado empleado,String nombreArchivoEmp, boolean anexar) throws EscrituraDatosEx;
+//    void escribirP (Productos producto,String nombreArchivoP, boolean anexar) throws EscrituraDatosEx;
+//    void escribirC (Cliente cliente,String nombreArchivoC, boolean anexar) throws EscrituraDatosEx;
+//    void escribirEmp (Empleado empleado,String nombreArchivoEmp, boolean anexar) throws EscrituraDatosEx;
     
     void agregarP(Productos producto, String nombreArchivoP) throws EscrituraDatosEx;
     void agregarC(Cliente cliente, String nombreArchivoC) throws EscrituraDatosEx;

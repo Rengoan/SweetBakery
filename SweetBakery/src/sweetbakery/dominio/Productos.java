@@ -3,17 +3,16 @@ package sweetbakery.dominio;
 import java.util.*;
 
 public class Productos {
-    
+
     private int idProducto;
+    private String nombreProducto;
+    private String descripcion;
     private TipoProducto tipoProducto;
     private double precio;
     private Date fechaC;
-    
-    
-    private static int contador = 1;
-    
 
-    
+    private static int contador = 1;
+
     //Constructores
     public Productos(int NumPedido) {
         this.idProducto = Productos.contador++;
@@ -22,24 +21,41 @@ public class Productos {
     public Productos() {
     }
 
-    public Productos(TipoProducto tipoProducto, double precio, Date fechaC) {
-        this();
-        this.tipoProducto = tipoProducto;
-        this.precio = precio;
-        this.fechaC = fechaC;
-    }
-
-    public Productos(int idProducto, TipoProducto tipoProducto, double precio, Date fechaC) {
+    public Productos(int idProducto, String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
         this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
         this.tipoProducto = tipoProducto;
         this.precio = precio;
         this.fechaC = fechaC;
     }
-    
+
+    public Productos(String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
+        this.tipoProducto = tipoProducto;
+        this.precio = precio;
+        this.fechaC = fechaC;
+    }
+
+   
+
     
 
-    //Getter and setters
+    
 
+//Getter and setters
+
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+
+    
+    
     public int getIdProducto() {
         return idProducto;
     }
@@ -48,12 +64,20 @@ public class Productos {
         this.idProducto = idProducto;
     }
 
-    public TipoProducto getTipoProducto() {
-        return tipoProducto;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setTipoProducto(TipoProducto tipoProducto) {
-        this.tipoProducto = tipoProducto;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getPrecio() {
@@ -76,17 +100,17 @@ public class Productos {
         return contador;
     }
 
+    
     public static void setContador(int contador) {
         Productos.contador = contador;
     }
 
-    
-
     //toString
+
     @Override
     public String toString() {
-        return "Productos{" + "idProducto=" + idProducto + ", tipoProducto=" + tipoProducto + ", precio=" + precio + ", fechaC=" + fechaC + '}';
+        return "Productos{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto + ", precio=" + precio + ", fechaC=" + fechaC + '}';
     }
     
-    
+
 }
