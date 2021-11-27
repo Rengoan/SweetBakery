@@ -29,6 +29,16 @@ public class Empleado {
         this.Ssocial = Ssocial;
         this.Cbancaria = Cbancaria;
     }
+
+    public Empleado(String nombre, String apellidos, String correo, String tlfEmp, String Ssocial, String Cbancaria) {
+        this();
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.tlfEmp = tlfEmp;
+        this.Ssocial = Ssocial;
+        this.Cbancaria = Cbancaria;
+    }
     
     //Getter and Setter
 

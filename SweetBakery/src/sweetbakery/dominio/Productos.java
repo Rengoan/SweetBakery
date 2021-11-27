@@ -3,39 +3,49 @@ package sweetbakery.dominio;
 import java.util.*;
 
 public class Productos {
-    private double precio;
+    
+    private int idProducto;
     private TipoProducto tipoProducto;
-    private int NumPedido;
-    private Date fechaP;
-    private static int contador;
+    private double precio;
+    private Date fechaC;
+    
+    
+    private static int contador = 1;
+    
 
     
     //Constructores
     public Productos(int NumPedido) {
-        this.NumPedido = Productos.contador++;
+        this.idProducto = Productos.contador++;
     }
 
     public Productos() {
     }
 
-    public Productos(double precio, TipoProducto tipoProducto, int NumPedido, Date fechaP) {
-        this.precio = precio;
+    public Productos(TipoProducto tipoProducto, double precio, Date fechaC) {
+        this();
         this.tipoProducto = tipoProducto;
-        this.NumPedido = NumPedido;
-        this.fechaP = fechaP;
-    }
-
-    
-    
-    
-    //Getter and setter
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
         this.precio = precio;
+        this.fechaC = fechaC;
+    }
+
+    public Productos(int idProducto, TipoProducto tipoProducto, double precio, Date fechaC) {
+        this.idProducto = idProducto;
+        this.tipoProducto = tipoProducto;
+        this.precio = precio;
+        this.fechaC = fechaC;
+    }
+    
+    
+
+    //Getter and setters
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public TipoProducto getTipoProducto() {
@@ -46,21 +56,20 @@ public class Productos {
         this.tipoProducto = tipoProducto;
     }
 
-
-    public int getNumPedido() {
-        return NumPedido;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setNumPedido(int NumPedido) {
-        this.NumPedido = NumPedido;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
-    public Date getFechaP() {
-        return fechaP;
+    public Date getFechaC() {
+        return fechaC;
     }
 
-    public void setFechaP(Date fechaP) {
-        this.fechaP = fechaP;
+    public void setFechaC(Date fechaC) {
+        this.fechaC = fechaC;
     }
 
     public static int getContador() {
@@ -70,18 +79,14 @@ public class Productos {
     public static void setContador(int contador) {
         Productos.contador = contador;
     }
-    
-    //toString
-    
-    @Override
-    public String toString() {
-        return "Productos{" + "precio=" + precio + ", tipoProducto=" + this.tipoProducto.getNombreProducto() + ", NumPedido=" + NumPedido + ", fechaP=" + fechaP + '}';
-    }
 
     
-    
-    
-    
+
+    //toString
+    @Override
+    public String toString() {
+        return "Productos{" + "idProducto=" + idProducto + ", tipoProducto=" + tipoProducto + ", precio=" + precio + ", fechaC=" + fechaC + '}';
+    }
     
     
 }

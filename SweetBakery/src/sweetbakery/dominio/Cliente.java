@@ -1,7 +1,7 @@
 package sweetbakery.dominio;
 
 public class Cliente {
-    private int id;
+    private int idCliente;
     private String nombre;
     private String apellido;
     private String correo;
@@ -11,28 +11,37 @@ public class Cliente {
     //Constructor
 
     public Cliente(int id) {
-        this.id = Cliente.contador++;
+        this.idCliente = Cliente.contador++;
     }
 
     public Cliente() {
     }
 
     public Cliente(int id, String nombre, String apellido, String correo, String tlf) {
-        this.id = id;
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.tlf = tlf;
+    }
+
+    public Cliente(String nombre, String apellido, String correo, String tlf) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.tlf = tlf;
     }
     
+    
+    
     //Getter and Setter
 
-    public int getId() {
-        return id;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCliente(int id) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre() {
@@ -79,7 +88,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", tlf=" + tlf + '}';
+        return "Cliente{" + "id=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", tlf=" + tlf + '}';
     }
     
     
