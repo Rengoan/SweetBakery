@@ -11,12 +11,6 @@ public class Productos {
     private double precio;
     private Date fechaC;
 
-    private static int contador = 1;
-
-    //Constructores
-    public Productos(int NumPedido) {
-        this.idProducto = Productos.contador++;
-    }
 
     public Productos() {
     }
@@ -98,20 +92,9 @@ public class Productos {
         this.fechaC = fechaC;
     }
 
-    public static int getContador() {
-        return contador;
-    }
-
-    
-    public static void setContador(int contador) {
-        Productos.contador = contador;
-    }
-
-    //toString
-
     @Override
     public String toString() {
-        return "Productos{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto + ", precio=" + precio + ", fechaC=" + fechaC + '}';
+        return "Productos\n===========" + "\nidProducto: " + idProducto + "\nnombreProducto: " + nombreProducto + "\nDescripcion: " + descripcion + "\ntipoProducto: " + tipoProducto + "\nprecio: " + precio + "\nfecha de caducidad: " + fechaC + "\n";
     }
     
 

@@ -1,9 +1,11 @@
 package sweetbakery.negocio;
 
+import sweetbakery.dominio.Cliente;
+
 public interface IClientes {
     
      // Agrega un cliente al archivo
-    void agregarCliente(int idCliente,String nombre, String apellido, String correo, String tlf, String nombreCatalogoC);
+     void agregarCliente(int idCliente,String nombre, String apellido, String correo, String tlf, String nombreCatalogoC);
     
     // Mostrar todos los clientes del catálogo
     void listarCliente(String nombreCatalogoC);

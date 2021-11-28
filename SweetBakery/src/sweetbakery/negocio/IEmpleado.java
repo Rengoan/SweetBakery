@@ -11,7 +11,7 @@ public interface IEmpleado {
     // Busca el empleado "Buscar" en nuestro catálogo
     void buscarEmpleado(String nombreCatalogoEmp, String buscar);
     
-    String buscarEmpleadoId(String nombreCatalogoEmp, int id);
+    void buscarEmpleadoId(String nombreCatalogoEmp, int buscar);
     
     // Nos inicia nuestro catálogo
     void iniciarCatalogoEmp(String nombreCatalogoEmp);

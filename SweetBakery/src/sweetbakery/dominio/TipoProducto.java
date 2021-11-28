@@ -3,19 +3,19 @@ package sweetbakery.dominio;
 
 public enum TipoProducto {
     
-    TARTAGRANDE("Tarta grande"),
+    TARTAPEQUENIA("Tarta pequeña"),
     TARTAMEDIANA("Tarta mediana"),
-    CUPCAKES("Cupcakes"),
-    ALFAJORES("Alfajores"),
-    MESADULCE("Mesa dulce");
+    TARTAGRANDE("Tarta grande"),
+    TARTAEVENTO("Tarta de evento");
     
-    private String nombreProducto;
+    
+    private String producto;
 
     
     //Constructor
 
-    private TipoProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    private TipoProducto(String producto) {
+        this.producto = producto;
         
     }
 
@@ -23,11 +23,11 @@ public enum TipoProducto {
 
  
     public String getNombreProducto() {
-        return nombreProducto;
+        return producto;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setNombreProducto(String producto) {
+        this.producto = producto;
     }
     
     

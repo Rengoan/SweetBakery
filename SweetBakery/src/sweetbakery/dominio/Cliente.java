@@ -6,19 +6,11 @@ public class Cliente {
     private String apellido;
     private String correo;
     private String tlf;
-    private static int contador=0;
-    
-    //Constructor
-
-    public Cliente(int id) {
-        this.idCliente = Cliente.contador++;
-    }
 
     public Cliente() {
     }
 
     public Cliente(int idCliente, String nombre, String apellido, String correo, String tlf) {
-        this();
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -82,19 +74,12 @@ public class Cliente {
         this.tlf = tlf;
     }
 
-    public static int getContador() {
-        return contador;
-    }
-
-    public static void setContador(int contador) {
-        Cliente.contador = contador;
-    }
-    
     //toString 
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", tlf=" + tlf + '}';
+        return "Cliente\n========" + "\nid: " + idCliente + "\nnombre: " + nombre 
+                + "\napellido: " + apellido + "\ncorreo: " + correo + "\ntlf: " + tlf + "\n";
     }
     
     

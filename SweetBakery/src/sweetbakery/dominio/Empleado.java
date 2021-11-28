@@ -8,20 +8,12 @@ public class Empleado {
     private String tlfEmp;
     private String Ssocial;
     private String Cbancaria;
-//    private static int contadorEmp;
-    
-    
-    //Constructor
-
-//    public Empleado(int idEmp) {
-//        this.idEmp = Empleado.contadorEmp++;
-//    }
-
     public Empleado() {
     }
 
-    public Empleado(int idEmp, String nombre, String apellidos, String correo, String tlfEmp, String Ssocial, String Cbancaria) {
-        this();
+    public Empleado(int idEmp, String nombre, String apellidos, String 
+            correo, String tlfEmp, String Ssocial, String Cbancaria) {
+        
         this.idEmp = idEmp;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -31,7 +23,8 @@ public class Empleado {
         this.Cbancaria = Cbancaria;
     }
 
-    public Empleado(String nombre, String apellidos, String correo, String tlfEmp, String Ssocial, String Cbancaria) {
+    public Empleado(String nombre, String apellidos, String 
+            correo, String tlfEmp, String Ssocial, String Cbancaria) {
         this();
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -99,13 +92,6 @@ public class Empleado {
         this.Cbancaria = Cbancaria;
     }
 
-//    public static int getContadorEmp() {
-//        return contadorEmp;
-//    }
-//
-//    public static void setContadorEmp(int contadorEmp) {
-//        Empleado.contadorEmp = contadorEmp;
-//    }
     
     
     
@@ -113,7 +99,10 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idEmp=" + idEmp + ", nombre=" + nombre + ", apellidos=" + apellidos + ", correo=" + correo + ", tlfEmp=" + tlfEmp + ", Ssocial=" + Ssocial + ", Cbancaria=" + Cbancaria + '}';
+        return "Empleado\n========= " + "\n idEmp: " + idEmp + "\n nombre: " 
+                + nombre + "\n apellidos: " + apellidos + "\n correo: " 
+                + correo + "\n tlfEmp: " + tlfEmp + "\n Ssocial: " + Ssocial 
+                + "\n Cbancaria: " + Cbancaria+"\n";
     }
     
     

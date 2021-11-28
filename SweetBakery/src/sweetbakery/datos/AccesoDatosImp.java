@@ -118,8 +118,8 @@ public class AccesoDatosImp implements IAccesoDatos {
 
     @Override
     public List<Cliente> ListarC(String nombreArchivoC) throws LecturaDatosEx {
+        
         File archivo = new File(nombreArchivoC);
-
         Cliente clienteN = null;
         String[] cliente = new String[5];
         List<Cliente> clientes = new ArrayList<>();
@@ -144,7 +144,6 @@ public class AccesoDatosImp implements IAccesoDatos {
             throw new LecturaDatosEx("Excepción leyendo el fichero cliente...");
         }
         return clientes;
-
     }
 
     @Override
@@ -177,29 +176,6 @@ public class AccesoDatosImp implements IAccesoDatos {
         return empleados;
     }
 
-//    @Override
-//    public void escribirP(Productos producto, String nombreArchivoP, boolean anexar) throws EscrituraDatosEx {
-//            File archivo = new File(nombreArchivoP);
-//        
-//        try {
-//            PrintWriter salida = new PrintWriter(new FileWriter(archivo, anexar));
-//            salida.println(producto.getTipoProducto(),producto.getPrecio(),producto.getFechaC());
-//            salida.close();
-//        } catch (IOException ex) {
-//            ex.printStackTrace(System.out);
-//            throw new EscrituraDatosEx("Excepción al escribir en el archivo");
-//        }
-//    }
-//
-//    @Override
-//    public void escribirC(Cliente cliente, String nombreArchivoC, boolean anexar) throws EscrituraDatosEx {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void escribirEmp(Empleado empleado, String nombreArchivoEmp, boolean anexar) throws EscrituraDatosEx {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
     @Override
     public void agregarP(Productos producto, String nombreArchivoP) throws EscrituraDatosEx {
         File archivo = new File(nombreArchivoP);
@@ -382,7 +358,7 @@ public class AccesoDatosImp implements IAccesoDatos {
             String lectura = null;
 
             while ((lectura = entrada.readLine()) != null) {
-                productoTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
+                productoTxt = lectura.split(";"); 
                 if (id == Integer.parseInt(productoTxt[0])) {
                     producto = new Productos(Integer.parseInt(productoTxt[0]),
                             productoTxt[1], productoTxt[2], TipoProducto.valueOf(productoTxt[3]), Double.parseDouble(productoTxt[4]),

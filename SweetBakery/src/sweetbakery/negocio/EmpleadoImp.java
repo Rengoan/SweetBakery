@@ -58,17 +58,12 @@ public class EmpleadoImp implements IEmpleado {
     }
 
     @Override
-    public String buscarEmpleadoId(String nombreCatalogoEmp, int id) {
-
-       Empleado empleado = null;
-        
+    public void buscarEmpleadoId(String nombreCatalogoEmp, int buscar) {
         try {
-            empleado = this.datos.buscarEmpleadoPorId(nombreCatalogoEmp, id);
+            System.out.println(this.datos.buscarEmpleadoPorId(nombreCatalogoEmp, buscar));
         } catch (LecturaDatosEx ex) {
-            ex.printStackTrace(System.out);
+           ex.printStackTrace(System.out);
         }
-        return empleado.toString();
-        
     }
 
     @Override
