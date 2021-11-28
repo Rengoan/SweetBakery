@@ -98,7 +98,7 @@ public class AccesoDatosImp implements IAccesoDatos {
 
                 producto = lectura.split(";"); // {idPruducto, nombreProducto,descripcion, precio,fecha}
                 productoN = new Productos(Integer.parseInt(producto[0]),
-                        producto[1],producto[2],TipoProducto.valueOf(producto[3]),
+                        producto[1], producto[2], TipoProducto.valueOf(producto[3]),
                         Double.parseDouble(producto[4]),
                         formatoFecha.parse(producto[5]));
                 productos.add(productoN);
@@ -207,8 +207,8 @@ public class AccesoDatosImp implements IAccesoDatos {
         try {
             PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
             String productoTxt = producto.getIdProducto() + ";"
-                    + producto.getNombreProducto() +";" + producto.getDescripcion()+ ";" 
-                    +producto.getTipoProducto()+";"+ producto.getPrecio() + ";"
+                    + producto.getNombreProducto() + ";" + producto.getDescripcion() + ";"
+                    + producto.getTipoProducto() + ";" + producto.getPrecio() + ";"
                     + producto.getFechaC();
             salida.println(productoTxt);
             salida.close();
@@ -257,87 +257,117 @@ public class AccesoDatosImp implements IAccesoDatos {
     }
 
     @Override
-    public int buscarNombreP(String nombreArchivoP, String termino) throws LecturaDatosEx {
-        File archivo = new File(nombreArchivoP);
-        String[] producto = new String[6];
-        int contador = 0;
-
+    public String buscarNombreP(String nombreArchivoP, String buscar) throws LecturaDatosEx {
+         File archivo = new File(nombreArchivoP);
+        String mensaje = "";
+        int cont = 1;
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = null;
-
-            while ((lectura = entrada.readLine()) != null) {
-                producto = lectura.split(";");
-                if (termino.equalsIgnoreCase(producto[1])) {
+            var lectura = entrada.readLine();
+            
+            while (lectura != null) {
+                String[] producto = lectura.split(";"); 
+                if(producto[1].equalsIgnoreCase(buscar)){
+                    mensaje = "El producto " + buscar + " se encuentra en la "
+                            + "línea " + cont + " del catálogo de productos";
                     break;
                 }
-                contador++;
+                
+                lectura = entrada.readLine();
+                cont++;
             }
+            
+            if(lectura == null) {
+                 mensaje = "El producto " + buscar + " no está "
+                    + "en el catálogo de productos.";
+            }
+            
             entrada.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Error de lectura listando los productos");
         } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
-                    + "buscar el producto con nombre " + termino);
+            throw new LecturaDatosEx("Error de lectura listando los productos");
         }
-        return contador;
+        
+        return mensaje;
     }
 
     @Override
-    public int buscarNombreC(String nombreArchivoC, String termino) throws LecturaDatosEx {
+    public String buscarNombreC(String nombreArchivoC, String buscar) throws LecturaDatosEx {
         File archivo = new File(nombreArchivoC);
-        String[] cliente = new String[5];
-        int contador = 0;
-
+        String mensaje = "";
+        int cont = 1;
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = null;
-
-            while ((lectura = entrada.readLine()) != null) {
-                cliente = lectura.split(";");
-                if (termino.equalsIgnoreCase(cliente[1])) {
+            var lectura = entrada.readLine();
+            
+            while (lectura != null) {
+                String[] cliente = lectura.split(";"); 
+                if(cliente[1].equalsIgnoreCase(buscar)){
+                    mensaje = "El cliente " + buscar + " se encuentra en la "
+                            + "línea " + cont + " del catálogo de clientes";
                     break;
                 }
-                contador++;
+                
+                lectura = entrada.readLine();
+                cont++;
             }
+            
+            if(lectura == null) {
+                 mensaje = "El cliente " + buscar + " no está "
+                    + "en el catálogo de clientes.";
+            }
+            
             entrada.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Error de lectura listando los clientes");
         } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
-                    + "buscar el cliente con nombre " + termino);
+            throw new LecturaDatosEx("Error de lectura listando los clientes");
         }
-        return contador;
+        
+        return mensaje;
+    
+    
     }
 
     @Override
-    public int buscarNombreEmp(String nombreArchivoEmp, String termino) throws LecturaDatosEx {
-        File archivo = new File(nombreArchivoEmp);
-        String[] empleado = new String[7];
-        int contador = 0;
-
+    public String buscarNombreEmp(String nombreArchivoEmp, String buscar) throws LecturaDatosEx {
+       File archivo = new File(nombreArchivoEmp);
+        String mensaje = "";
+        int cont = 1;
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = null;
-
-            while ((lectura = entrada.readLine()) != null) {
-                empleado = lectura.split(";");
-                if (termino.equalsIgnoreCase(empleado[1])) {
+            var lectura = entrada.readLine();
+            
+            while (lectura != null) {
+                String[] empleado = lectura.split(";"); 
+                if(empleado[1].equalsIgnoreCase(buscar)){
+                    mensaje = "El empleado " + buscar + " se encuentra en la "
+                            + "línea " + cont + " del catálogo de empleados";
                     break;
                 }
-                contador++;
+                
+                lectura = entrada.readLine();
+                cont++;
             }
+            
+            if(lectura == null) {
+                 mensaje = "El empleado " + buscar + " no está "
+                    + "en el catálogo de empleados.";
+            }
+            
             entrada.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
+            throw new LecturaDatosEx("Error de lectura listando los empleados");
         } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-            throw new LecturaDatosEx("Excepcion leyendo el recurso al "
-                    + "buscar el cliente con nombre " + termino);
+            throw new LecturaDatosEx("Error de lectura listando los empleados");
         }
-        return contador;
+        
+        return mensaje;
+
     }
 
     @Override
@@ -355,8 +385,8 @@ public class AccesoDatosImp implements IAccesoDatos {
                 productoTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
                 if (id == Integer.parseInt(productoTxt[0])) {
                     producto = new Productos(Integer.parseInt(productoTxt[0]),
-                        productoTxt[1],productoTxt[2],TipoProducto.valueOf(productoTxt[3]), Double.parseDouble(productoTxt[4]),
-                        formatoFecha.parse(productoTxt[5]));
+                            productoTxt[1], productoTxt[2], TipoProducto.valueOf(productoTxt[3]), Double.parseDouble(productoTxt[4]),
+                            formatoFecha.parse(productoTxt[5]));
                     break;
                 }
             }
@@ -378,7 +408,6 @@ public class AccesoDatosImp implements IAccesoDatos {
         File archivo = new File(nombreArchivoC);
         String[] clienteTxt = new String[5];
         Cliente cliente = null;
-        
 
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
@@ -388,8 +417,8 @@ public class AccesoDatosImp implements IAccesoDatos {
                 clienteTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
                 if (id == Integer.parseInt(clienteTxt[0])) {
                     cliente = new Cliente(Integer.parseInt(clienteTxt[0]),
-                        clienteTxt[1], clienteTxt[2],
-                        clienteTxt[3], clienteTxt[4]);
+                            clienteTxt[1], clienteTxt[2],
+                            clienteTxt[3], clienteTxt[4]);
                     break;
                 }
             }
@@ -409,7 +438,6 @@ public class AccesoDatosImp implements IAccesoDatos {
         File archivo = new File(nombreArchivoEmp);
         String[] empleadoTxt = new String[7];
         Empleado empleado = null;
-        
 
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
@@ -419,8 +447,8 @@ public class AccesoDatosImp implements IAccesoDatos {
                 empleadoTxt = lectura.split(";"); // {idArticulo(0), nombre(1), descripcion(2), precio(3), fecha(4)}
                 if (id == Integer.parseInt(empleadoTxt[0])) {
                     empleado = new Empleado(Integer.parseInt(empleadoTxt[0]),
-                        empleadoTxt[1], empleadoTxt[2],
-                        empleadoTxt[3], empleadoTxt[4], empleadoTxt[5], empleadoTxt[6]);
+                            empleadoTxt[1], empleadoTxt[2],
+                            empleadoTxt[3], empleadoTxt[4], empleadoTxt[5], empleadoTxt[6]);
                     break;
                 }
             }
@@ -439,34 +467,34 @@ public class AccesoDatosImp implements IAccesoDatos {
     public void borrarProducto(String nombreArchivoP, String nombreProducto) throws AccesoDatosEx {
         File archivoOri = new File(nombreArchivoP);
         File archivoBackup = new File("temp.txt");
-        
+
         String[] producto = new String[6];
-        
+
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
-            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
-            String lectura = null; 
-            
-            while((lectura = entrada.readLine()) != null){
-            
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+
                 producto = lectura.split(";");
-                if (producto[1] != nombreProducto){
+                if (producto[1] != nombreProducto) {
                     salida.println(producto);
-                }                
-                
+                }
+
             }
             entrada.close();
             salida.close();
-            
-            if (existeP(nombreArchivoP)){
+
+            if (existeP(nombreArchivoP)) {
                 borrarArchivoP(nombreArchivoP);
             }
-            
+
             archivoBackup.renameTo(archivoOri);
-            
+
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
     }
@@ -475,34 +503,34 @@ public class AccesoDatosImp implements IAccesoDatos {
     public void borrarCliente(String nombreArchivoC, String nombreCliente) throws AccesoDatosEx {
         File archivoOri = new File(nombreArchivoC);
         File archivoBackup = new File("temp.txt");
-        
-        String[] producto = new String[5];
-        
+
+        String[] cliente = new String[5];
+
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
-            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
-            String lectura = null; 
-            
-            while((lectura = entrada.readLine()) != null){
-            
-                producto = lectura.split(";");
-                if (producto[1] != nombreCliente){
-                    salida.println(producto);
-                }                
-                
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+
+                cliente = lectura.split(";");
+                if (cliente[1] != nombreCliente) {
+                    salida.println(cliente);
+                }
+
             }
             entrada.close();
             salida.close();
-            
-            if (existeC(nombreArchivoC)){
+
+            if (existeC(nombreArchivoC)) {
                 borrarArchivoC(nombreArchivoC);
             }
-            
+
             archivoBackup.renameTo(archivoOri);
-            
+
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
     }
@@ -511,48 +539,47 @@ public class AccesoDatosImp implements IAccesoDatos {
     public void borrarEmpleado(String nombreArchivoEmp, String nombreEmpleado) throws AccesoDatosEx {
         File archivoOri = new File(nombreArchivoEmp);
         File archivoBackup = new File("temp.txt");
-        
-        String[] producto = new String[7];
-        
+
+        String[] empleado = new String[7];
+
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivoOri));
-            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));            
-            String lectura = null; 
-            
-            while((lectura = entrada.readLine()) != null){
-            
-                producto = lectura.split(";");
-                if (producto[1] != nombreEmpleado){
-                    salida.println(producto);
-                }                
-                
+            PrintWriter salida = new PrintWriter(new FileWriter(archivoBackup));
+            String lectura = null;
+
+            while ((lectura = entrada.readLine()) != null) {
+
+                empleado = lectura.split(";");
+                if (empleado[1] != nombreEmpleado) {
+                    salida.println(empleado);
+                }
+
             }
             entrada.close();
             salida.close();
-            
-            if (existeEmp(nombreArchivoEmp)){
+
+            if (existeEmp(nombreArchivoEmp)) {
                 borrarArchivoEmp(nombreArchivoEmp);
             }
-            
+
             archivoBackup.renameTo(archivoOri);
-            
+
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
-        
+
     }
 
     @Override
     public String borrarArchivoP(String nombreArchivoP) {
         File archivo = new File(nombreArchivoP);
         String msg = "";
-        if (existeP(nombreArchivoP)){
+        if (existeP(nombreArchivoP)) {
             archivo.delete();
             msg = "Recurso borrado con éxito";
-        }
-        else {
+        } else {
             msg = "No se ha podido borrar el archivo ya que no existe";
         }
         return msg;
@@ -560,13 +587,12 @@ public class AccesoDatosImp implements IAccesoDatos {
 
     @Override
     public String borrarArchivoC(String nombreArchivoC) {
-         File archivo = new File(nombreArchivoC);
+        File archivo = new File(nombreArchivoC);
         String msg = "";
-        if (existeP(nombreArchivoC)){
+        if (existeP(nombreArchivoC)) {
             archivo.delete();
             msg = "Recurso borrado con éxito";
-        }
-        else {
+        } else {
             msg = "No se ha podido borrar el archivo ya que no existe";
         }
         return msg;
@@ -576,11 +602,10 @@ public class AccesoDatosImp implements IAccesoDatos {
     public String borrarArchivoEmp(String nombreArchivoEmp) {
         File archivo = new File(nombreArchivoEmp);
         String msg = "";
-        if (existeP(nombreArchivoEmp)){
+        if (existeP(nombreArchivoEmp)) {
             archivo.delete();
             msg = "Recurso borrado con éxito";
-        }
-        else {
+        } else {
             msg = "No se ha podido borrar el archivo ya que no existe";
         }
         return msg;

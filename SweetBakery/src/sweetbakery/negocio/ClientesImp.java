@@ -21,10 +21,10 @@ public class ClientesImp implements IClientes {
     
     
     @Override
-    public void agregarCliente(int id, String nombre, String apellido, String correo, String tlf, String nombreCatalogoC) {
+    public void agregarCliente(int idCliente,String nombre, String apellido, String correo, String tlf, String nombreCatalogoC) {
         try {
             if (this.datos.existeC(nombreCatalogoC)) {
-                this.datos.agregarC(new Cliente(id, nombre, apellido, correo, tlf), nombreCatalogoC);
+                this.datos.agregarC(new Cliente(idCliente, nombre, apellido, correo, tlf), nombreCatalogoC);
             } else {
                 System.out.println("Catálogo de clientes no inicilizado");
             }
@@ -41,8 +41,8 @@ public class ClientesImp implements IClientes {
         try {
             clientes = this.datos.ListarC(nombreCatalogoC);
             clientes.forEach(cliente -> {
-                System.out.println(cliente.getIdCliente()+cliente.getNombre()+cliente.getApellido()+
-                        cliente.getCorreo()+cliente.getTlf());
+                System.out.println(cliente.getIdCliente()+"; "+cliente.getNombre()+"; "+cliente.getApellido()+"; "+
+                        cliente.getCorreo()+"; "+cliente.getTlf());
             });
         } catch (LecturaDatosEx ex) {
             System.out.println("Error leyendo el catálogo de clientes");
@@ -53,7 +53,7 @@ public class ClientesImp implements IClientes {
     @Override
     public void buscarCliente(String nombreCatalogoC, String buscar) {
         try {
-            System.out.println(this.datos.buscarNombreP(nombreCatalogoC, buscar));
+            System.out.println(this.datos.buscarNombreC(nombreCatalogoC, buscar));
         } catch (LecturaDatosEx ex) {
            ex.printStackTrace(System.out);
         }
@@ -81,6 +81,23 @@ public class ClientesImp implements IClientes {
             ex.printStackTrace(System.out);
             System.out.println("Error al inicializar el catálogo de Clientes");
         }
+    }
+
+    @Override
+    public void borrarC(String nombreCatalogoC, String nombreCliente) {
+         try {
+            this.datos.borrarCliente(nombreCatalogoC, nombreCliente);
+        } catch (AccesoDatosEx ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("Excepción a la hora de borrar un cliente");
+        }
+        System.out.println("Cliente borrado con éxito");
+    }
+
+    @Override
+    public String borrarCatalogoC(String nombreCatalogoC) {
+        this.datos.borrarArchivoC(nombreCatalogoC);
+        return "Catalogo de clientes borrado.";
     }
     
 }

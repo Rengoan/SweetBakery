@@ -26,7 +26,7 @@ public class ProductosImp implements IProductos {
         
         try {
             if (this.datos.existeP(nombreCatalogoP)) {
-                this.datos.agregarP(new Productos(idProducto, nombre, descrip, producto, precio, fechaC), nombreCatalogoP);
+                this.datos.agregarP(new Productos( idProducto, nombreCatalogoP, descrip, producto, 0, fechaC), nombreCatalogoP);
             } else {
                 System.out.println("Catálogo de productos no inicilizado");
             }
@@ -43,8 +43,8 @@ public class ProductosImp implements IProductos {
         try {
             productos = this.datos.ListarP(nombreCatalogoP);
             productos.forEach(producto -> {
-                System.out.println(producto.getIdProducto()+producto.getNombreProducto()+
-                        producto.getDescripcion()+producto.getTipoProducto()+producto.getPrecio()
+                System.out.println(producto.getIdProducto()+"; "+producto.getNombreProducto()+"; "+
+                        producto.getDescripcion()+"; "+producto.getTipoProducto()+"; "+producto.getPrecio()+"; "
                         +producto.getFechaC());
             });
         } catch (LecturaDatosEx ex) {
@@ -85,6 +85,23 @@ public class ProductosImp implements IProductos {
             ex.printStackTrace(System.out);
             System.out.println("Error al inicializar el catálogo de productos");
         }
+    }
+
+    @Override
+    public void borrarP(String nombreCatalogoP, String nombreProducto) {
+        try {
+            this.datos.borrarProducto(nombreCatalogoP, nombreProducto);
+        } catch (AccesoDatosEx ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("Excepción a la hora de borrar un producto");
+        }
+        System.out.println("Producto borrado con éxito");
+    }
+
+    @Override
+    public String borrarCatalogoP(String nombreCatalogoP) {
+        this.datos.borrarArchivoP(nombreCatalogoP);
+        return "Catalogo de productos borrado.";
     }
     
 }

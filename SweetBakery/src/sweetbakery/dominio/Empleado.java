@@ -8,19 +8,20 @@ public class Empleado {
     private String tlfEmp;
     private String Ssocial;
     private String Cbancaria;
-    private static int contadorEmp;
+//    private static int contadorEmp;
     
     
     //Constructor
 
-    public Empleado(int idEmp) {
-        this.idEmp = Empleado.contadorEmp++;
-    }
+//    public Empleado(int idEmp) {
+//        this.idEmp = Empleado.contadorEmp++;
+//    }
 
     public Empleado() {
     }
 
     public Empleado(int idEmp, String nombre, String apellidos, String correo, String tlfEmp, String Ssocial, String Cbancaria) {
+        this();
         this.idEmp = idEmp;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -98,13 +99,13 @@ public class Empleado {
         this.Cbancaria = Cbancaria;
     }
 
-    public static int getContadorEmp() {
-        return contadorEmp;
-    }
-
-    public static void setContadorEmp(int contadorEmp) {
-        Empleado.contadorEmp = contadorEmp;
-    }
+//    public static int getContadorEmp() {
+//        return contadorEmp;
+//    }
+//
+//    public static void setContadorEmp(int contadorEmp) {
+//        Empleado.contadorEmp = contadorEmp;
+//    }
     
     
     

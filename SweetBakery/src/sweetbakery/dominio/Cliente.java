@@ -17,13 +17,16 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int id, String nombre, String apellido, String correo, String tlf) {
+    public Cliente(int idCliente, String nombre, String apellido, String correo, String tlf) {
+        this();
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.tlf = tlf;
     }
+
+    
 
     public Cliente(String nombre, String apellido, String correo, String tlf) {
         this();

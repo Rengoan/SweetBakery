@@ -22,6 +22,7 @@ public class Productos {
     }
 
     public Productos(int idProducto, String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
+        this();
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
@@ -31,6 +32,7 @@ public class Productos {
     }
 
     public Productos(String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
+        this();
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
         this.tipoProducto = tipoProducto;

@@ -27,9 +27,9 @@ public interface IAccesoDatos {
     void agregarC(Cliente cliente, String nombreArchivoC) throws EscrituraDatosEx;
     void agregarEmp(Empleado empleado, String nombreArchivoEmp) throws EscrituraDatosEx;
     
-    int buscarNombreP(String nombreArchivoP, String termino) throws LecturaDatosEx;
-    int buscarNombreC(String nombreArchivoC, String termino) throws LecturaDatosEx;
-    int buscarNombreEmp(String nombreArchivoEmp, String termino) throws LecturaDatosEx;
+    String buscarNombreP(String nombreArchivoP, String buscar) throws LecturaDatosEx;
+    String buscarNombreC(String nombreArchivoC, String buscar) throws LecturaDatosEx;
+    String buscarNombreEmp(String nombreArchivoEmp, String buscar) throws LecturaDatosEx;
     
     Productos buscarProductoPorId(String nombreArchivoP, int id) throws LecturaDatosEx;
     Cliente buscarClientePorId(String nombreArchivoC, int id) throws LecturaDatosEx;

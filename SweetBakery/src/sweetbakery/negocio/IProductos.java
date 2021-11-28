@@ -20,4 +20,8 @@ public interface IProductos {
     // Nos inicia nuestro catálogo
     void iniciarCatalogoP(String nombreCatalogoP);
     
+    void borrarP(String nombreCatalogoP, String nombreProducto);
+    
+    String borrarCatalogoP(String nombreCatalogoP);
+    
 }
