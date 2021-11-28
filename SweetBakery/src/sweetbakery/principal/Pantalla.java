@@ -129,9 +129,13 @@ public class Pantalla {
                                 System.out.println("Introduzca la fecha de caducidad del producto con formato dd/mm/yyyy");
                                 String fecha = lectura.next();
                                 fechaC = convertirFecha(fecha);
-                                catalogoP.agregarProducto(idProducto, nombreProducto, descripcion, tipoProducto, precio, fechaC, nombreCatalogoP);
-                                System.out.println("Se ha agregado el nombre " + nombreProducto + " ,de que es el producto " + descripcion
-                                        + " ,el tipo de producto " + tipoProducto + " ,el precio " + precio + " ,y la fecha de caducidad del producto " + fechaC + " al catalogo de productos "
+                                catalogoP.agregarProducto(idProducto, nombreProducto, descripcion, 
+                                        tipoProducto, precio, fechaC, nombreCatalogoP);
+                                System.out.println("Se ha agregado el nombre " + nombreProducto 
+                                        + " ,de que es el producto " + descripcion
+                                        + " ,el tipo de producto " + tipoProducto + " ,el precio " 
+                                        + precio + " ,y la fecha de caducidad del producto " 
+                                        + fechaC + " al catalogo de productos "
                                         + nombreCatalogoP);
                                 break;
                             case 3:
