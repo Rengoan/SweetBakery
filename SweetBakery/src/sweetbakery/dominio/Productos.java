@@ -1,5 +1,6 @@
 package sweetbakery.dominio;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Productos {
@@ -10,12 +11,15 @@ public class Productos {
     private TipoProducto tipoProducto;
     private double precio;
     private Date fechaC;
+    
+    
 
 
     public Productos() {
     }
 
-    public Productos(int idProducto, String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
+    public Productos(int idProducto, String nombreProducto, String descripcion,
+            TipoProducto tipoProducto, double precio, Date fechaC) {
         this();
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
@@ -25,7 +29,8 @@ public class Productos {
         this.fechaC = fechaC;
     }
 
-    public Productos(String nombreProducto, String descripcion, TipoProducto tipoProducto, double precio, Date fechaC) {
+    public Productos(String nombreProducto, String descripcion,
+            TipoProducto tipoProducto, double precio, Date fechaC) {
         this();
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
@@ -34,24 +39,13 @@ public class Productos {
         this.fechaC = fechaC;
     }
 
-   
-
+   //Getter and setters
     
-
-    
-
-//Getter and setters
-
-    public TipoProducto getTipoProducto() {
-        return tipoProducto;
+    public String getfecha_caducidad_toString() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        return df.format(fechaC);
     }
 
-    public void setTipoProducto(TipoProducto tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
-
-    
-    
     public int getIdProducto() {
         return idProducto;
     }
@@ -76,6 +70,14 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+
     public double getPrecio() {
         return precio;
     }
@@ -92,10 +94,27 @@ public class Productos {
         this.fechaC = fechaC;
     }
 
+    
+    
+    //toString
+
+//    @Override
+//    public String toString() {
+//        return "Productos\n===========" + "\nidProducto: " + idProducto 
+//                + "\nnombreProducto: " + nombreProducto + "\nDescripcion: " 
+//                + descripcion + "\ntipoProducto: " + tipoProducto + "\nprecio: " 
+//                + precio + "\nfecha de caducidad: " + fechaC + "\n";
+//    }
+
     @Override
     public String toString() {
-        return "Productos\n===========" + "\nidProducto: " + idProducto + "\nnombreProducto: " + nombreProducto + "\nDescripcion: " + descripcion + "\ntipoProducto: " + tipoProducto + "\nprecio: " + precio + "\nfecha de caducidad: " + fechaC + "\n";
+        return "Productos\n===================" + "fechaCIdentificador de Producto: " + idProducto 
+                + "\nNombre de producto: " + nombreProducto 
+                + "\nDescripcion: " + descripcion + "\nTamaño: " + tipoProducto 
+                + "\nPrecio" + precio + "Fecha de compra: " + this.getfecha_caducidad_toString() + "\n";
     }
+    
+    
     
 
 }
